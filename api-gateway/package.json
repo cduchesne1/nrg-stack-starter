@@ -1,5 +1,5 @@
 {
-  "name": "backend",
+  "name": "api-gateway",
   "version": "0.0.1",
   "description": "",
   "author": "",
@@ -20,8 +20,8 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
+    "@apollo/gateway": "^2.7.1",
     "@apollo/server": "^4.10.1",
-    "@apollo/subgraph": "^2.7.1",
     "@nestjs/apollo": "^12.1.0",
     "@nestjs/common": "^10.0.0",
     "@nestjs/core": "^10.0.0",
@@ -70,5 +70,6 @@
     ],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
-  }
+  },
+  "packageManager": "yarn@4.1.1"
 }
