@@ -5,13 +5,22 @@ import { GraphQLModule } from '@nestjs/graphql';
 
 @Module({
   imports: [
-    GraphQLModule.forRoot<ApolloGatewayDriverConfig>({
+    GraphQLModule.forRootAsync<ApolloGatewayDriverConfig>({
       driver: ApolloGatewayDriver,
-      gateway: {
-        supergraphSdl: new IntrospectAndCompose({
-          subgraphs: [{ name: 'User', url: 'http://localhost:5001/graphql' }],
-        }),
-      },
+      useFactory: () => ({
+        gateway: {
+          supergraphSdl: new IntrospectAndCompose({
+            subgraphs: [
+              {
+                name: 'User',
+                url:
+                  process.env.USERS_GRAPHQL_URL ||
+                  'http://localhost:5001/graphql',
+              },
+            ],
+          }),
+        },
+      }),
     }),
   ],
 })

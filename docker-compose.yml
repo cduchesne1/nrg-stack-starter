@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  users:
+    build:
+      context: ./users
+      dockerfile: Dockerfile
+    ports:
+      - "5001:5001"
+    networks:
+      - backend
+
+  api-gateway:
+    build:
+      context: ./api-gateway
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - users
+    environment:
+      - USERS_GRAPHQL_URL=http://users:5001/graphql
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge

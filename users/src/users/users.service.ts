@@ -10,4 +10,8 @@ export class UsersService {
   findObjectById(id: number) {
     return this.users.find((user) => user.id === id);
   }
+
+  findAll() {
+    return this.users;
+  }
 }

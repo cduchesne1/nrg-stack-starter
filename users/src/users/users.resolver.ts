@@ -13,6 +13,11 @@ export class UsersResolver {
     return this.usersService.findObjectById(id);
   }
 
+  @Query((returns) => [User])
+  async users() {
+    return this.usersService.findAll();
+  }
+
   @ResolveReference()
   resolveReference(reference: { __typename: string; id: number }): User {
     return this.usersService.findObjectById(reference.id);
