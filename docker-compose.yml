@@ -9,6 +9,15 @@ services:
       - "5001:5001"
     networks:
       - backend
+  
+  posts:
+    build:
+      context: ./post
+      dockerfile: Dockerfile
+    ports:
+      - "5002:5002"
+    networks:
+      - backend
 
   api-gateway:
     build:
@@ -18,8 +27,10 @@ services:
       - "3000:3000"
     depends_on:
       - users
+      - posts
     environment:
       - USERS_GRAPHQL_URL=http://users:5001/graphql
+      - POSTS_GRAPHQL_URL=http://posts:5002/graphql
     networks:
       - backend
 

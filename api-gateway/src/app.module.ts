@@ -17,6 +17,12 @@ import { GraphQLModule } from '@nestjs/graphql';
                   process.env.USERS_GRAPHQL_URL ||
                   'http://localhost:5001/graphql',
               },
+              {
+                name: 'Post',
+                url:
+                  process.env.POSTS_GRAPHQL_URL ||
+                  'http://localhost:5002/graphql',
+              },
             ],
           }),
         },

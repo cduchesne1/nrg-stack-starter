@@ -6,7 +6,7 @@ export class PostService {
   private posts: Post[] = [];
 
   create(id: number, title: string): Post {
-    this.posts.push({ id, title });
+    this.posts.push({ id, title, userId: 1 });
     return this.posts.slice(-1)[0];
   }
 
@@ -30,5 +30,9 @@ export class PostService {
 
   remove(id: number) {
     this.posts.filter((post) => post.id != id);
+  }
+
+  forUser(userId: number) {
+    return this.posts.filter((post) => post.userId == userId);
   }
 }

@@ -1,0 +1,19 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Post {
+  """Post id"""
+  id: Int!
+  title: String!
+}
+
+type Query {
+  sayHello: String!
+  post(id: Int!): Post!
+}
+
+type Mutation {
+  createPost(id: Int!, title: String!): Post!
+  removePost(id: Int!): Post!
+}

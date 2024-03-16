@@ -1,4 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { ObjectType, Field, Int } from '@nestjs/graphql';
+import { User } from './user.entity';
 
 @ObjectType()
 export class Post {
@@ -7,4 +9,10 @@ export class Post {
 
   @Field()
   title: string;
+
+  @Field((type) => Int)
+  userId: number;
+
+  @Field((type) => User)
+  user?: User;
 }

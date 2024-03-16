@@ -1,6 +1,16 @@
-import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import {
+  Resolver,
+  Query,
+  Mutation,
+  Args,
+  Int,
+  ResolveField,
+  Parent,
+} from '@nestjs/graphql';
 import { PostService } from './post.service';
 import { Post } from './entities/post.entity';
+import { User } from './entities/user.entity';
 
 @Resolver(() => Post)
 export class PostResolver {
@@ -18,7 +28,7 @@ export class PostResolver {
     return this.postService.create(id, title);
   }
 
-  @Query(() => [Post], { name: 'post' })
+  @Query(() => [Post], { name: 'posts' })
   findAll() {
     return this.postService.findAll();
   }
@@ -36,5 +46,10 @@ export class PostResolver {
   @Mutation(() => Post)
   removePost(@Args('id', { type: () => Int }) id: number) {
     return this.postService.remove(id);
+  }
+
+  @ResolveField((of) => User)
+  user(@Parent() post: Post): any {
+    return { __typename: 'User', id: post.userId };
   }
 }
